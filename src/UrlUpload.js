@@ -22,10 +22,11 @@ const UrlUpload = () => {
       const formData = new FormData();
       formData.append("sku", sku);
       formData.append("imageNumber", imageNumber);
+      
 
       // Make the POST request
       const response = await axios.post(
-        "http://127.0.0.1:5000/DeleteImage",
+        "http://127.0.0.1:5000/DeleteSingleImage",
         formData,
         {
           withCredentials: true,
