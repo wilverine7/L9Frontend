@@ -35,6 +35,7 @@ const UrlUpload = () => {
           },
         }
       );
+      
       setDisplayImage(null);
       setError("Deleted");
     } catch (error) {
@@ -46,15 +47,10 @@ const UrlUpload = () => {
     event.preventDefault();
     setLoading(true);
 
-    // try {
-    //   new URL(url);
-    //   var validUrl = true;
-    // } catch (e) {
-    //   alert("Invalid URL");
-    // }
-
-    // if (validUrl) {
+    
     try {
+      setDisplayImage(null);
+
       const formData = new FormData();
       formData.append("url", url);
       formData.append("sku", sku);
@@ -146,9 +142,10 @@ const UrlUpload = () => {
               </div>
             </div>
             {error && (
-              <div>
-                {error}
-                {flag && <input type="submit" value="Yes" />}
+              <div className="row">
+                <div className="">{error}</div>
+                {flag && <div className="col"><input className="btn btn-danger" type="submit" value="Yes" />
+                </div>}
               </div>
             )}
             <input type="hidden" name="flag" value={flag} />
@@ -183,8 +180,9 @@ const UrlUpload = () => {
             </button>
             <h3>Thumbnail</h3>
             <div>
+              {/* Date.now() is needed so that the page rerenders the new image if the user overwrites the old image */}
               <img
-                src={displayImage}
+                src={`${displayImage}?${Date.now()}`}
                 alt="displayImage"
                 style={{
                   width: "250px",
@@ -196,8 +194,9 @@ const UrlUpload = () => {
             </div>
             <h3>Product Page</h3>
             <div>
+              {/* Date.now() is needed so that the page rerenders the new image if the user overwrites the old image */}
               <img
-                src={displayImage}
+                src={`${displayImage}?${Date.now()}`}
                 alt="displayImage"
                 style={{
                   width: "700px",
